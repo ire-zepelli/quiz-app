@@ -6,18 +6,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Quiz {
-    private JPanel mainPanel, headerPanel, footerPanel, questionPanel, questionBlock;
-    private JButton homeButton, aboutButton, choiceButton_1, choiceButton_2, choiceButton_3;
-    private JLabel titleText, copyrightText, questionLabel;
-    private LinkedList math = MathQuestions.getQuestions();
-   private int num = 1;
+   private JPanel mainPanel, headerPanel, footerPanel, questionPanel, questionBlock;
+   private JButton homeButton, aboutButton, choiceButton_1, choiceButton_2, choiceButton_3;
+   private JLabel titleText, copyrightText, questionLabel;
+   private LinkedList math = MathQuestions.getQuestions();
+   private int questionIndex = 1, score = 0;
 
    public Quiz(String subject){
       initialize(subject);
    }
 
-   public void increment(){
-        num++;
+   public void incrementScore(){
+        score++;
+   }
+
+   public void incrementIndex(){
+        questionIndex++;
    }
 
    private void initialize(String subject){    
@@ -109,9 +113,22 @@ public class Quiz {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] data = math.get(num);
-                setQuestionCard(questionLabel, choiceButton_1, choiceButton_2, choiceButton_3, data);
-                increment();
+                if(questionIndex == 11){
+                    return;
+                }
+                
+                String[] data = math.get(questionIndex - 1);
+                if(data[4].equals(button.getText())) incrementScore();
+                
+                System.out.println(score);
+
+                if(questionIndex < 10){    
+                    data = math.get(questionIndex);
+                    setQuestionCard(questionLabel, choiceButton_1, choiceButton_2, choiceButton_3, data);
+                    incrementIndex();
+                    return;
+                }
+                incrementIndex();
             }
             
         });
