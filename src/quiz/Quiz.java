@@ -6,18 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Quiz {
-   private JPanel mainPanel, headerPanel, footerPanel, questionPanel, questionBlock;
-   private JButton homeButton, aboutButton, choiceButton_1, choiceButton_2, choiceButton_3;
-   private JLabel titleText, copyrightText, questionLabel;
-   private LinkedList math;
-   private static int number = 0;
+    private JPanel mainPanel, headerPanel, footerPanel, questionPanel, questionBlock;
+    private JButton homeButton, aboutButton, choiceButton_1, choiceButton_2, choiceButton_3;
+    private JLabel titleText, copyrightText, questionLabel;
+    private LinkedList math = MathQuestions.getQuestions();
+   private int num = 1;
 
    public Quiz(String subject){
       initialize(subject);
    }
 
-   private void incrementNumber(){
-        number++;
+   public void increment(){
+        num++;
    }
 
    private void initialize(String subject){    
@@ -25,28 +25,23 @@ public class Quiz {
         int defaultWidth = (int) screenSize.getWidth();
         int defaultHeight = (int) screenSize.getHeight();
         
+        
         mainPanel = new JPanel();
         headerPanel = new JPanel();
         footerPanel = new JPanel();
         questionPanel = new JPanel();
         questionBlock = new JPanel();
         
-        math = MathQuestions.getQuestions();
+        String[] data = math.get(0);
 
-        String[] data = math.get(Quiz.number);
-        
-        System.out.println(Quiz.number);
-        System.out.println(data[0]);
         questionLabel = createJLabel(20,0, 950, 100, data[0], "Arial", Font.BOLD, 20, 53, 65, 79, 255,255,255);
         choiceButton_1 = createButton(25,200, 950, 50, data[1], "Arial", Font.PLAIN, 20, 72,79,118,255,255,255);
-        buttonAction(choiceButton_1, data);
         choiceButton_2 = createButton(25,300, 950, 50, data[2], "Arial", Font.PLAIN, 20, 72,79,118,255,255,255);
-        buttonAction(choiceButton_2, data);
         choiceButton_3 = createButton(25,400, 950, 50, data[3], "Arial", Font.PLAIN, 20, 72,79,118,255,255,255);
-        buttonAction(choiceButton_3, data);
         
-
-
+        buttonAction(choiceButton_1);
+        buttonAction(choiceButton_2);
+        buttonAction(choiceButton_3);
 
         titleText = new JLabel("<html>"+
         " <h1 style=\"font-size:40px\">quiz" + 
@@ -110,12 +105,13 @@ public class Quiz {
         
         
     }
-    public void buttonAction(JButton button, String[] data){
+    public void buttonAction(JButton button){
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                incrementNumber();
+                String[] data = math.get(num);
                 setQuestionCard(questionLabel, choiceButton_1, choiceButton_2, choiceButton_3, data);
+                increment();
             }
             
         });
