@@ -68,12 +68,17 @@ public class Home {
         mathButton = createButton(17,250, 200,300,"Math", "Arial", Font.PLAIN, 20, 0, 0, 0 , 255, 255, 255);
         buttonAction(mathButton, "math");
         scienceButton = createButton(234,250, 200,300,"Science", "Arial", Font.PLAIN, 20, 0, 0, 0 , 255, 255, 255);
+        buttonAction(scienceButton, "science");
         englishButton = createButton(451,250, 200,300,"English", "Arial", Font.PLAIN, 20, 0, 0, 0 , 255, 255, 255);
+        buttonAction(englishButton, "english");
         historyButton= createButton(668,250, 200,300,"History", "Arial", Font.PLAIN, 20, 0, 0, 0 , 255, 255, 255);
+        buttonAction(historyButton, "history");
         popButton = createButton(885,250, 200,300,"Pop Culture", "Arial", Font.PLAIN, 20, 0, 0, 0 , 255, 255, 255);
+        buttonAction(popButton, "pop");
         itButton = createButton(1102,250, 200,300,"I.T.", "Arial", Font.PLAIN, 20, 0, 0, 0 , 255, 255, 255);
+        buttonAction(itButton, "it");
         customButton = createButton(1319,250, 200,300,"Custom Topic", "Arial", Font.PLAIN, 20, 0, 0, 0 , 255, 255, 255); 
-
+        // buttonAction(customButton, "custom");
 
         String quote = "<html><p style=\"text-align: center\">In all the splendor of solitude... it is a test of myself, <br/> and one thing I loathe is to have to test myself in front of other people.</p></html>";
         
@@ -97,7 +102,7 @@ public class Home {
         contentPanel.add(customButton);
 
         footerPanel.add(copyrightText);
-
+        
         mainPanel.add(headerPanel);
         mainPanel.add(footerPanel);
         mainPanel.add(contentPanel);

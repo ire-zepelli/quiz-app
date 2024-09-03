@@ -4,13 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import create_component.*;
+import pages.PageControl;
 
 public class Quiz {
-   private JPanel mainPanel, headerPanel, footerPanel, questionPanel, questionBlock;
+   private JPanel mainPanel, headerPanel, footerPanel, questionPanel, questionBlock, modal;
    private JButton homeButton, aboutButton, choiceButton_1, choiceButton_2, choiceButton_3;
    private JLabel titleText, copyrightText, questionLabel;
    private LinkedList math = MathQuestions.getQuestions();
+   private LinkedList english = EnglishQuestions.getQuestions();
+   private LinkedList science = ScienceQuestions.getQuestions();
+   private LinkedList it = ITQuestions.getQuestions();
+   private LinkedList history = HistoryQuestions.getQuestions();
+   private LinkedList pop = PopQuestions.getQuestions();    
    private int questionIndex = 1, score = 0;
+   private String subject;
 
    public Quiz(String subject){
       initialize(subject);
@@ -24,7 +32,8 @@ public class Quiz {
         questionIndex++;
    }
 
-   private void initialize(String subject){    
+   private void initialize(String subject){   
+        this.subject = subject; 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int defaultWidth = (int) screenSize.getWidth();
         int defaultHeight = (int) screenSize.getHeight();
@@ -36,7 +45,8 @@ public class Quiz {
         questionPanel = new JPanel();
         questionBlock = new JPanel();
         
-        String[] data = math.get(0);
+
+        String[] data = getData(subject, 0);
 
         questionLabel = createJLabel(20,0, 950, 100, data[0], "Arial", Font.BOLD, 20, 53, 65, 79, 255,255,255);
         choiceButton_1 = createButton(25,200, 950, 50, data[1], "Arial", Font.PLAIN, 20, 72,79,118,255,255,255);
@@ -107,28 +117,26 @@ public class Quiz {
         mainPanel.add(footerPanel);
         mainPanel.add(questionPanel);
         
-        
     }
     public void buttonAction(JButton button){
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(questionIndex == 11){
-                    return;
-                }
                 
-                String[] data = math.get(questionIndex - 1);
+                String[] data = getData(subject, questionIndex - 1);
                 if(data[4].equals(button.getText())) incrementScore();
                 
-                System.out.println(score);
-
                 if(questionIndex < 10){    
-                    data = math.get(questionIndex);
+                    data = getData(subject, questionIndex);
                     setQuestionCard(questionLabel, choiceButton_1, choiceButton_2, choiceButton_3, data);
                     incrementIndex();
                     return;
                 }
-                incrementIndex();
+
+                if(questionIndex == 10){
+                    PageControl.showHome();
+                    System.out.println("Your "+ subject + " score: " + score);
+                }
             }
             
         });
@@ -167,4 +175,25 @@ public class Quiz {
    public JPanel getPanel(){
         return mainPanel;
    };
+
+   public String[] getData(String subject ,int index){
+        switch (subject) {
+            case "math":
+                return math.get(index);
+            case "english":
+                return english.get(index);
+            case "science":
+                return science.get(index);
+            case "history":
+                return history.get(index);
+            case "it":
+                return it.get(index);
+            case "pop":
+                return pop.get(index);
+            default:
+                break;
+        }
+        return null;
+   }
+
 }
