@@ -11,8 +11,9 @@ public class PageControl {
     static JPanel panelCont = new JPanel();
     static CardLayout pages = new CardLayout();
     Auth auth =  new Auth();
-    Home home = new Home();
+    static Home home;
     static Quiz quiz;
+
 
     public PageControl(){
         initialize();
@@ -32,19 +33,21 @@ public class PageControl {
         
         panelCont.setLayout(pages);
         panelCont.add(auth.getPanel(), "auth");
-        panelCont.add(home.getPanel(), "home");
-
+        
         frame.add(panelCont);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
-    }
 
+    }
+    
     public static void showAuth(){
         pages.show(panelCont, "auth");
     }
-
+    
     public static void showHome(){
+        home = new Home();
+        panelCont.add(home.getPanel(), "home");
         pages.show(panelCont, "home");
     }
 

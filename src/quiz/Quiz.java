@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import create_component.*;
 import pages.PageControl;
+import stats.Stats;
 
 public class Quiz {
    private JPanel mainPanel, headerPanel, footerPanel, questionPanel, questionBlock, modal;
@@ -56,7 +57,7 @@ public class Quiz {
         buttonAction(choiceButton_1);
         buttonAction(choiceButton_2);
         buttonAction(choiceButton_3);
-
+        
         titleText = new JLabel("<html>"+
         " <h1 style=\"font-size:40px\">quiz" + 
         "<span style=\"color:#56C9AA\">ify</span>" + 
@@ -70,11 +71,11 @@ public class Quiz {
         questionPanel.setBounds(250,200, 1000, 500);
         questionPanel.setBackground(new Color(53, 65, 79));
         questionPanel.setLayout(null);
-
+        
         questionBlock.setBounds(25  ,30, 950, 100);
         questionBlock.setBackground(new Color(33, 40, 52));
         questionBlock.setLayout(null);
-
+        
         headerPanel.setBounds(0,0, defaultWidth, 100);
         headerPanel.setBackground(new Color(20,23,29));
         headerPanel.setLayout(null);
@@ -93,7 +94,7 @@ public class Quiz {
         
         titleText.setForeground(new Color(255, 255, 255));
         titleText.setBounds(30 , 5, 200, 80);
-
+        
         footerPanel.setBounds(0,defaultHeight-100, defaultWidth, 100);
         footerPanel.setBackground(new Color(32,40,52));
         footerPanel.setLayout(null);
@@ -132,10 +133,21 @@ public class Quiz {
                     incrementIndex();
                     return;
                 }
-
+                
                 if(questionIndex == 10){
-                    PageControl.showHome();
-                    System.out.println("Your "+ subject + " score: " + score);
+                    JPanel modal = Create_Component.Modal(score);
+                    ActionListener showModal = new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            PageControl.showHome();
+                        }
+                    };
+                    
+                    Timer timer = new Timer(3000 ,showModal);
+                    timer.setRepeats(false);
+                    timer.start();
+                    questionPanel.setVisible(false);
+                    setStats(subject, score);
+                    mainPanel.add(modal);
                 }
             }
             
@@ -175,6 +187,31 @@ public class Quiz {
    public JPanel getPanel(){
         return mainPanel;
    };
+
+   public void setStats(String subject, int score){
+        switch (subject) {
+            case "math":
+                Stats.math = score;
+                break;
+            case "english":
+                Stats.english = score;
+                break;
+            case "science":
+                Stats.science = score;
+                break;
+            case "history":
+                Stats.history = score;
+                break;
+            case "it":
+                Stats.it = score;
+                break;
+            case "pop":
+                Stats.pop = score;
+                break;
+            default:
+                break;
+        }
+   }
 
    public String[] getData(String subject ,int index){
         switch (subject) {

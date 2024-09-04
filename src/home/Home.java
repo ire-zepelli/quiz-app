@@ -2,7 +2,9 @@ package home;
 
 import javax.swing.*;
 
+import create_component.Create_Component;
 import pages.PageControl;
+import stats.Stats;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,7 @@ import java.awt.event.ActionListener;
 
 public class Home {
     private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
+    private JPanel mathStatus, englishStatus, historyStatus, itStatus, popStatus, scienceStatus;
     private JButton homeButton, aboutButton, mathButton, scienceButton, englishButton, historyButton, popButton, itButton, customButton;
     private JLabel titleText, largeText, smallText, copyrightText;
     
@@ -27,6 +30,20 @@ public class Home {
         headerPanel = new JPanel();
         contentPanel = new JPanel();
         footerPanel = new JPanel();
+        
+        mathStatus = Create_Component.StatusBar(Stats.math, 25, 530);
+        scienceStatus = Create_Component.StatusBar(Stats.science,242, 530);
+        englishStatus = Create_Component.StatusBar(Stats.english,460, 530);
+        historyStatus = Create_Component.StatusBar(Stats.history,678, 530);
+        popStatus = Create_Component.StatusBar(Stats.pop,896, 530);
+        itStatus = Create_Component.StatusBar(Stats.it,1114, 530);
+        
+        contentPanel.add(mathStatus);
+        contentPanel.add(scienceStatus);
+        contentPanel.add(englishStatus);
+        contentPanel.add(historyStatus);
+        contentPanel.add(popStatus);
+        contentPanel.add(itStatus);
         
         titleText = new JLabel("<html>"+
         " <h1 style=\"font-size:40px\">quiz" + 

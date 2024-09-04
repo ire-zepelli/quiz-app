@@ -7,6 +7,16 @@ import java.awt.*;
 import java.awt.geom.*;
 
 public class Create_Component {
+        public static JPanel StatusBar(int score, int x,int y){
+            JPanel outline, statusBar;
+            int width = score == 0 ? 10 : 170/10*score;
+            statusBar = Panel(3, 2, width , 10, 0, 255, 0, 255, 0, 255, 0, 255, 25);
+            outline = Panel(x, y, 180, 15, 255, 255, 255, 255, 255, 255, 255, 255, 25);
+
+            outline.add(statusBar);
+
+            return outline;
+        }
         public static JPanel Modal(int score){
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             JPanel modal;

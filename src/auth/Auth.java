@@ -106,7 +106,6 @@ public class Auth {
 
         authSection_2.add(previewPanel);
         
-
         login_btn.addActionListener(new ActionListener() {
 
             @Override
