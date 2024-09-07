@@ -5,6 +5,7 @@ import java.awt.*;
 import auth.*;
 import home.*;
 import quiz.Quiz;
+import achievements.*;
 
 public class PageControl {
     JFrame frame = new JFrame();
@@ -13,6 +14,7 @@ public class PageControl {
     Auth auth =  new Auth();
     static Home home;
     static Quiz quiz;
+    static Achievements achievements;
 
 
     public PageControl(){
@@ -39,6 +41,7 @@ public class PageControl {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
 
+        showAchievements();
     }
     
     public static void showAuth(){
@@ -55,5 +58,11 @@ public class PageControl {
         quiz = new Quiz(subject);
         panelCont.add(quiz.getPanel(), "quiz");
         pages.show(panelCont, "quiz");
+    }
+
+    public static void showAchievements(){
+        achievements = new Achievements();
+        panelCont.add(achievements.getPanel(), "achievements");
+        pages.show(panelCont, "achievements");
     }
 }

@@ -10,7 +10,7 @@ import stats.Stats;
 
 public class Quiz {
    private JPanel mainPanel, headerPanel, footerPanel, questionPanel, questionBlock, modal;
-   private JButton homeButton, aboutButton, choiceButton_1, choiceButton_2, choiceButton_3;
+   private JButton homeButton, achievementButton, choiceButton_1, choiceButton_2, choiceButton_3;
    private JLabel titleText, copyrightText, questionLabel;
    private LinkedList math = MathQuestions.getQuestions();
    private LinkedList english = EnglishQuestions.getQuestions();
@@ -85,12 +85,14 @@ public class Quiz {
         homeButton.setContentAreaFilled(false); 
         homeButton.setFocusPainted(false); 
         homeButton.setOpaque(false);
-        
-        aboutButton = createButton(300, 30, 100, 50, "About", "Arial", Font.PLAIN, 20, 0, 0, 0, 255, 255, 255);
-        aboutButton.setBorderPainted(false); 
-        aboutButton.setContentAreaFilled(false); 
-        aboutButton.setFocusPainted(false); 
-        aboutButton.setOpaque(false);
+        buttonAction(homeButton, "home");
+
+        achievementButton = createButton(270, 30, 200, 50, "Achivements", "Arial", Font.PLAIN, 20, 0, 0, 0, 255, 255, 255);
+        achievementButton.setBorderPainted(false); 
+        achievementButton.setContentAreaFilled(false); 
+        achievementButton.setFocusPainted(false); 
+        achievementButton.setOpaque(false);
+        buttonAction(achievementButton, "achievements");
         
         titleText.setForeground(new Color(255, 255, 255));
         titleText.setBounds(30 , 5, 200, 80);
@@ -112,13 +114,28 @@ public class Quiz {
         
         headerPanel.add(titleText);
         headerPanel.add(homeButton);
-        headerPanel.add(aboutButton);        
+        headerPanel.add(achievementButton);        
         
         mainPanel.add(headerPanel);
         mainPanel.add(footerPanel);
         mainPanel.add(questionPanel);
         
     }
+
+    public void buttonAction(JButton button, String dispatch){
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(dispatch.equals("home")){
+                    PageControl.showHome();
+                }
+                if(dispatch.equals("achievements")){
+                    PageControl.showAchievements();
+                }
+            }
+        });
+    }
+
     public void buttonAction(JButton button){
         button.addActionListener(new ActionListener() {
             @Override

@@ -1,7 +1,6 @@
 package create_component;
 
 import javax.swing.*;
-import javax.swing.text.LabelView;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -10,7 +9,7 @@ public class Create_Component {
         public static JPanel StatusBar(int score, int x,int y){
             JPanel outline, statusBar;
             int width = score == 0 ? 10 : 170/10*score;
-            statusBar = Panel(3, 2, width , 10, 0, 255, 0, 255, 0, 255, 0, 255, 25);
+            statusBar = Panel(3, 2, width , 10, 86, 201, 170, 255, 86, 201, 170, 255, 25);
             outline = Panel(x, y, 180, 15, 255, 255, 255, 255, 255, 255, 255, 255, 25);
 
             outline.add(statusBar);

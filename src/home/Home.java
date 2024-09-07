@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class Home {
     private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
     private JPanel mathStatus, englishStatus, historyStatus, itStatus, popStatus, scienceStatus;
-    private JButton homeButton, aboutButton, mathButton, scienceButton, englishButton, historyButton, popButton, itButton, customButton;
+    private JButton homeButton, achievementButton, mathButton, scienceButton, englishButton, historyButton, popButton, itButton, customButton;
     private JLabel titleText, largeText, smallText, copyrightText;
     
     public Home(){
@@ -59,24 +59,26 @@ public class Home {
         headerPanel.setBackground(new Color(20,23,29));
         headerPanel.setLayout(null);
         
-        homeButton = createButton(200, 30, 100, 50, "Home", "Arial", Font.PLAIN, 20, 0, 0, 0, 255, 255, 255);
+        homeButton = createButton(200, 30, 100, 50, "Home", "Arial", Font.PLAIN, 20, 0, 0, 0, 86, 201, 170);
         homeButton.setBorderPainted(false); 
         homeButton.setContentAreaFilled(false); 
         homeButton.setFocusPainted(false); 
         homeButton.setOpaque(false);
+        buttonAction(homeButton, "home");
         
-        aboutButton = createButton(300, 30, 100, 50, "About", "Arial", Font.PLAIN, 20, 0, 0, 0, 255, 255, 255);
-        aboutButton.setBorderPainted(false); 
-        aboutButton.setContentAreaFilled(false); 
-        aboutButton.setFocusPainted(false); 
-        aboutButton.setOpaque(false);
+        achievementButton = createButton(270, 30, 200, 50, "Achivements", "Arial", Font.PLAIN, 20, 0, 0, 0, 255, 255, 255);
+        achievementButton.setBorderPainted(false); 
+        achievementButton.setContentAreaFilled(false); 
+        achievementButton.setFocusPainted(false); 
+        achievementButton.setOpaque(false);
+        buttonAction(achievementButton, "achievements");
         
         titleText.setForeground(new Color(255, 255, 255));
         titleText.setBounds(30 , 5, 200, 80);
         
         headerPanel.add(titleText);
         headerPanel.add(homeButton);
-        headerPanel.add(aboutButton);
+        headerPanel.add(achievementButton);
         
         contentPanel.setBounds(0,100, defaultWidth, defaultHeight-100);
         contentPanel.setBackground(new Color(32, 40 , 52));
@@ -135,6 +137,14 @@ public class Home {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(subject.equals("home")){
+                    PageControl.showHome();
+                }
+                if(subject.equals("achievements")){
+                    System.out.println("inside action");
+                    System.out.println(subject);
+                    PageControl.showAchievements();
+                }
                 PageControl.showQuiz(subject);
             }
             
