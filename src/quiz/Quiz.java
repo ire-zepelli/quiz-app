@@ -17,7 +17,8 @@ public class Quiz {
    private LinkedList science = ScienceQuestions.getQuestions();
    private LinkedList it = ITQuestions.getQuestions();
    private LinkedList history = HistoryQuestions.getQuestions();
-   private LinkedList pop = PopQuestions.getQuestions();    
+   private LinkedList pop = PopQuestions.getQuestions();
+   private LinkedList custom = CustomQuestions.getQuestions();    
    private int questionIndex = 1, score = 0;
    private String subject;
 
@@ -87,7 +88,7 @@ public class Quiz {
         homeButton.setOpaque(false);
         buttonAction(homeButton, "home");
 
-        achievementButton = createButton(270, 30, 200, 50, "Achivements", "Arial", Font.PLAIN, 20, 0, 0, 0, 255, 255, 255);
+        achievementButton = createButton(270, 30, 200, 50, "Achievements", "Arial", Font.PLAIN, 20, 0, 0, 0, 255, 255, 255);
         achievementButton.setBorderPainted(false); 
         achievementButton.setContentAreaFilled(false); 
         achievementButton.setFocusPainted(false); 
@@ -128,9 +129,11 @@ public class Quiz {
             public void actionPerformed(ActionEvent e){
                 if(dispatch.equals("home")){
                     PageControl.showHome();
+                    return;
                 }
                 if(dispatch.equals("achievements")){
                     PageControl.showAchievements();
+                    return;
                 }
             }
         });
@@ -224,6 +227,8 @@ public class Quiz {
                 break;
             case "pop":
                 Stats.pop = score;
+            case "custom":
+                Stats.custom = score;
                 break;
             default:
                 break;
@@ -244,6 +249,8 @@ public class Quiz {
                 return it.get(index);
             case "pop":
                 return pop.get(index);
+            case "custom":
+                return custom.get(index);
             default:
                 break;
         }

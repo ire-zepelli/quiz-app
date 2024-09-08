@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import auth.*;
 import home.*;
-import quiz.Quiz;
+import quiz.*;
 import achievements.*;
 
 public class PageControl {
@@ -14,6 +14,7 @@ public class PageControl {
     Auth auth =  new Auth();
     static Home home;
     static Quiz quiz;
+    static AddCustomQuiz addCustomQuiz;
     static Achievements achievements;
 
 
@@ -41,7 +42,6 @@ public class PageControl {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
 
-        showAchievements();
     }
     
     public static void showAuth(){
@@ -64,5 +64,11 @@ public class PageControl {
         achievements = new Achievements();
         panelCont.add(achievements.getPanel(), "achievements");
         pages.show(panelCont, "achievements");
+    }
+
+    public static void showAddCustomQuiz(){
+        addCustomQuiz = new AddCustomQuiz();
+        panelCont.add(addCustomQuiz.getPanel(), "customQuiz");
+        pages.show(panelCont, "customQuiz");
     }
 }

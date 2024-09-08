@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import create_component.Create_Component;
 import pages.PageControl;
+import quiz.CustomQuestions;
 import stats.Stats;
 
 import java.awt.*;
@@ -12,7 +13,7 @@ import java.awt.event.ActionListener;
 
 public class Home {
     private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
-    private JPanel mathStatus, englishStatus, historyStatus, itStatus, popStatus, scienceStatus;
+    private JPanel mathStatus, englishStatus, historyStatus, itStatus, popStatus, scienceStatus, customStatus;
     private JButton homeButton, achievementButton, mathButton, scienceButton, englishButton, historyButton, popButton, itButton, customButton;
     private JLabel titleText, largeText, smallText, copyrightText;
     
@@ -37,6 +38,10 @@ public class Home {
         historyStatus = Create_Component.StatusBar(Stats.history,678, 530);
         popStatus = Create_Component.StatusBar(Stats.pop,896, 530);
         itStatus = Create_Component.StatusBar(Stats.it,1114, 530);
+        if(CustomQuestions.getSize() == 10){
+            customStatus = Create_Component.StatusBar(Stats.custom,1332, 530);
+            contentPanel.add(customStatus);
+        }
         
         contentPanel.add(mathStatus);
         contentPanel.add(scienceStatus);
@@ -66,7 +71,7 @@ public class Home {
         homeButton.setOpaque(false);
         buttonAction(homeButton, "home");
         
-        achievementButton = createButton(270, 30, 200, 50, "Achivements", "Arial", Font.PLAIN, 20, 0, 0, 0, 255, 255, 255);
+        achievementButton = createButton(270, 30, 200, 50, "Achievements", "Arial", Font.PLAIN, 20, 0, 0, 0, 255, 255, 255);
         achievementButton.setBorderPainted(false); 
         achievementButton.setContentAreaFilled(false); 
         achievementButton.setFocusPainted(false); 
@@ -97,7 +102,7 @@ public class Home {
         itButton = createButton(1102,250, 200,300,"I.T.", "Arial", Font.PLAIN, 20, 0, 0, 0 , 255, 255, 255);
         buttonAction(itButton, "it");
         customButton = createButton(1319,250, 200,300,"Custom Topic", "Arial", Font.PLAIN, 20, 0, 0, 0 , 255, 255, 255); 
-        // buttonAction(customButton, "custom");
+        buttonAction(customButton, "custom");
 
         String quote = "<html><p style=\"text-align: center\">In all the splendor of solitude... it is a test of myself, <br/> and one thing I loathe is to have to test myself in front of other people.</p></html>";
         
@@ -139,11 +144,16 @@ public class Home {
             public void actionPerformed(ActionEvent e) {
                 if(subject.equals("home")){
                     PageControl.showHome();
+                    return;
                 }
                 if(subject.equals("achievements")){
-                    System.out.println("inside action");
                     System.out.println(subject);
                     PageControl.showAchievements();
+                    return;
+                }
+                if(subject.equals("custom") && CustomQuestions.getSize() != 10){
+                    PageControl.showAddCustomQuiz();
+                    return;
                 }
                 PageControl.showQuiz(subject);
             }

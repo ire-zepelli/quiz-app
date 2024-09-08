@@ -71,7 +71,7 @@ public class Achievements {
         homeButton.setOpaque(false);
         buttonAction(homeButton, "home");
         
-        achievementButton = Create_Component.Button(270, 30, 200, 50, "Achivements", "Arial", Font.PLAIN, 20, 0, 0, 0, 86, 201, 170);
+        achievementButton = Create_Component.Button(270, 30, 200, 50, "Achievements", "Arial", Font.PLAIN, 20, 0, 0, 0, 86, 201, 170);
         achievementButton.setBorderPainted(false); 
         achievementButton.setContentAreaFilled(false); 
         achievementButton.setFocusPainted(false); 
@@ -112,9 +112,11 @@ public class Achievements {
             public void actionPerformed(ActionEvent e) {
                 if(subject.equals("home")){
                     PageControl.showHome();
+                    return;
                 }
                 if(subject.equals("achievements")){
                     PageControl.showAchievements();
+                    return;
                 }
                 PageControl.showQuiz(subject);
             }

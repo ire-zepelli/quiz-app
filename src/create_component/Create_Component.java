@@ -6,6 +6,15 @@ import java.awt.*;
 import java.awt.geom.*;
 
 public class Create_Component {
+        public static JTextField TextField(int x, int y, int w, int h, int fr, int fg, int fb, String fontStyle, int fontWeight, int fontSize, int br, int bg, int bb){
+        JTextField textField = new JTextField();
+        textField.setBounds(x,y,w,h);
+        textField.setForeground(new Color(fr,fg,fb));
+        textField.setFont(new Font(fontStyle, fontWeight, fontSize));
+        textField.setBackground(new Color(br,bg,bb));
+        return textField;
+        }
+
         public static JPanel StatusBar(int score, int x,int y){
             JPanel outline, statusBar;
             int width = score == 0 ? 10 : 170/10*score;
@@ -21,7 +30,7 @@ public class Create_Component {
             JPanel modal;
             JLabel title, desc;
             title = Label(160,0, 300, 100, "Your Score:", "Arial", Font.PLAIN, 30, 0,0,0,255,255,255);
-            desc = Label(125,110, 300, 100, score+"/10", "Arial", Font.PLAIN, 90, 0,0,0,255,255,255);
+            desc = Label(150,110, 300, 100, score+"/10", "Arial", Font.PLAIN, 90, 0,0,0,255,255,255);
 
             modal = Panel(0, 0, 500, 300, 33, 40, 32, 255, 33, 40, 32, 255, 0);
             modal.setLayout(null);
